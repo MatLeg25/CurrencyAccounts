@@ -77,10 +77,10 @@ public class ExchangeService {
     private Account exchangeFromPlnToUsd(BigDecimal amount, Account account) {
        log.info("Exchange from PLN to USD");
 
-        BigDecimal bidRate = this.exchangeClient.getBidRate(Currency.USD);
+        BigDecimal askRate = this.exchangeClient.getAskRate(Currency.USD);
 
         BigDecimal exchangedPLN = account.getPln().subtract(amount);
-        BigDecimal exchangedUSD = account.getUsd().add((amount.divide(bidRate, 2, RoundingMode.HALF_UP)));
+        BigDecimal exchangedUSD = account.getUsd().add((amount.divide(askRate, 2, RoundingMode.HALF_UP)));
 
         account.setPln(exchangedPLN);
         account.setUsd(exchangedUSD);
@@ -92,10 +92,10 @@ public class ExchangeService {
     private Account exchangeFromUsdToPln(BigDecimal amount, Account account) {
         log.info("Exchange from USD to PLN");
 
-        BigDecimal askRate = this.exchangeClient.getAskRate(Currency.USD);
+        BigDecimal bidRate = this.exchangeClient.getBidRate(Currency.USD);
 
         BigDecimal exchangedUSD = account.getUsd().subtract(amount);
-        BigDecimal exchangedPLN = account.getPln().add(amount.multiply(askRate));
+        BigDecimal exchangedPLN = account.getPln().add(amount.multiply(bidRate));
 
         account.setPln(exchangedPLN);
         account.setUsd(exchangedUSD);
