@@ -22,7 +22,7 @@ public class ExchangeValidator {
             userHasMoneyToExchange(exchange, account));
     }
 
-
+    //TODO: rethink amount criteria, for now less than 1.00 is not allowed (cast to int)
     private  boolean isAmount(BigDecimal amount) {
         return amount.intValue()>0;
     }
