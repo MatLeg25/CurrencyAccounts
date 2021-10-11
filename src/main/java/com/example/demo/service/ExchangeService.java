@@ -26,6 +26,7 @@ public class ExchangeService {
     private final AccountService accountService;
     private final ExchangeValidator exchangeValidator;
 
+
     @Autowired
     public ExchangeService(ExchangeClient exchangeClient, AppUserService appUserService, AccountService accountService, ExchangeValidator exchangeValidator) {
         this.exchangeClient = exchangeClient;

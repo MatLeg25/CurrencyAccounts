@@ -19,6 +19,7 @@ public class ExchangeController {
         this.exchangeService = exchangeService;
     }
 
+
     @PostMapping("api/v1/exchange")
     public ResponseEntity<String> exchange(@RequestBody Exchange exchange) {
         return this.exchangeService.exchange(exchange);

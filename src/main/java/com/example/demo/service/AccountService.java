@@ -10,10 +10,12 @@ public class AccountService {
 
     private final AccountRepository accountRepository;
 
+
     @Autowired
     public AccountService(AccountRepository accountRepository) {
         this.accountRepository = accountRepository;
     }
+
 
     public void updateAccount(Account account) {
         Account updatedAccount = this.accountRepository.getById(account.getId());
@@ -22,6 +24,6 @@ public class AccountService {
         updatedAccount.setUsd(account.getUsd());
 
         this.accountRepository.save(updatedAccount);
-
     }
+
 }

@@ -3,9 +3,9 @@ package com.example.demo.service;
 import com.example.demo.model.AppUser;
 import com.example.demo.repository.AccountRepository;
 import com.example.demo.repository.AppUserRepository;
+import com.example.demo.validator.PeselValidator;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -15,6 +15,7 @@ class AppUserServiceTest {
 
     @Mock private AppUserRepository appUserRepository;
     @Mock private AccountRepository accountRepository;
+    @Mock private PeselValidator peselValidator;
 
     private AutoCloseable autoCloseable;
     private AppUserService appUserServiceTest;
@@ -22,7 +23,7 @@ class AppUserServiceTest {
     @BeforeEach
     void setUp() {
         autoCloseable = MockitoAnnotations.openMocks(this);
-        appUserServiceTest = new AppUserService(appUserRepository, accountRepository);
+        appUserServiceTest = new AppUserService(appUserRepository, accountRepository, peselValidator);
     }
 
     @AfterEach

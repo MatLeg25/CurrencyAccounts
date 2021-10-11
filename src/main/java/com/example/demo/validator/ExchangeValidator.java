@@ -49,6 +49,6 @@ public class ExchangeValidator {
         BigDecimal moneyOnAccount = (exchange.getFrom().equals(Currency.USD)) ? account.getUsd() : account.getPln();
 
         return moneyOnAccount.compareTo(exchange.getAmount()) >= 0;
-
     }
+
 }
