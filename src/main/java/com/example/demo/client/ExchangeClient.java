@@ -8,9 +8,7 @@ import org.springframework.web.client.RestTemplate;
 import java.math.BigDecimal;
 
 @Component
-//TODO by interface
 public class ExchangeClient {
-
 
     //https://api.nbp.pl/api/exchangerates/rates/C/USD/?format=json
     private final String apiBasicUrl = "https://api.nbp.pl/api/exchangerates/rates/C/";
@@ -31,9 +29,5 @@ public class ExchangeClient {
     public BigDecimal getBidRate(Currency currency) {
         return this.getRatesByCurrencies(currency).getRates().get(0).getBid();
     }
-
-
-
-
 
 }

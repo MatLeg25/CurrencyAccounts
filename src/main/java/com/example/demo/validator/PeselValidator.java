@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 @Slf4j
 public class PeselValidator {
 
+    private final int PESEL_LENGTH = 11;
 
     public boolean validate(String pesel) {
         return isNumericPesel(pesel) && isValidLengthPesel(pesel) && isAdult(pesel);
@@ -28,7 +29,7 @@ public class PeselValidator {
 
 
     private boolean isValidLengthPesel(String pesel) {
-        if(pesel.length() == 11) {
+        if(pesel.length() == PESEL_LENGTH) {
             return true;
         }
         log.warn("Incorrect pesel ["+pesel+"] - invalid length");
@@ -38,6 +39,7 @@ public class PeselValidator {
 
     //TODO more detailed verification
     //The current implementation of age validation works with the date of birth in range 1900-2099
+    //The current implementation assume adult person when: (current year - birth year) >= 18 - NO ACCURATE VERIFICATION BASED ON CALENDAR DAY
     //Age validation according to PESEL, based on: https://obywatel.gov.pl/pl/dokumenty-i-dane-osobowe/czym-jest-numer-pesel
     private boolean isAdult(String pesel) {
 
@@ -48,7 +50,6 @@ public class PeselValidator {
         int currentYear = time.getYear();
         int currentMonth = time.getMonthValue();
         int currentDay = time.getDayOfMonth();
-        //System.out.println("CURRENt DATE: "+ currentDay+"|"+currentMonth+"|"+currentYear);
 
         int peselYear = Integer.parseInt(pesel.substring(0,2));
         int peselMonth = Integer.parseInt(pesel.substring(2,4));
@@ -56,12 +57,6 @@ public class PeselValidator {
 
         //The current implementation of age validation works with the date of birth in range 1900-2099
         peselCentury = (peselMonth<=12) ? 1900 : 2000;
-        //if(peselMonth<12) {peselCentury=1900;} else {peselCentury=2000;}
-
-        //System.out.println("PESEL DATE: "+ peselDay+"|"+peselMonth+"|"+(peselYear+peselCentury));
-
-        System.out.print("WERYFIKCJA WIEKU: ");
-        System.out.println((currentYear-ADULT_AGE)>=(peselYear+peselCentury));
 
         return ((currentYear-ADULT_AGE)>=(peselYear+peselCentury));
     }
