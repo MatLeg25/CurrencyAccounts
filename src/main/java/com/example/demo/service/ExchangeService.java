@@ -35,7 +35,7 @@ public class ExchangeService {
         this.exchangeValidator = exchangeValidator;
     }
 
-
+    //TODO: incorrect data validation
     @Transactional
     public ResponseEntity<String> exchange(Exchange exchange) {
 

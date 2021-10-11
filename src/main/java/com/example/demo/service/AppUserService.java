@@ -42,7 +42,7 @@ public class AppUserService {
         return this.appUserRepository.findAll();
     }
 
-
+    //TODO: incorrect data validation
     @Transactional
     public ResponseEntity<String> registration(AppUser appUser) {
 
