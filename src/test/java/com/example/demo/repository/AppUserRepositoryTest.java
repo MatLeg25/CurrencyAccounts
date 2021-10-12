@@ -23,6 +23,7 @@ class AppUserRepositoryTest {
     void itShouldCheckIfUserExists() {
         AppUser appUser = new AppUser();
         appUser.setName("Name");
+        appUser.setSurname("Surname");
         appUser.setPesel("99111178901");
         appUserRepositoryTest.save(appUser);
 

@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.model.Account;
 import com.example.demo.model.AppUser;
 import com.example.demo.repository.AccountRepository;
 import com.example.demo.repository.AppUserRepository;
@@ -7,8 +8,14 @@ import com.example.demo.validator.PeselValidator;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+
+import java.math.BigDecimal;
+import java.util.Optional;
+
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.Mockito.verify;
 
 class AppUserServiceTest {
@@ -31,16 +38,26 @@ class AppUserServiceTest {
         autoCloseable.close();
     }
 
+
     @Test
     void canGetUserByPesel() {
+        String PESEL = "99111178901";
         AppUser appUser = new AppUser();
         appUser.setName("Name");
-        appUser.setPesel("99111178901");
+        appUser.setSurname("Surname");
+        appUser.setPesel(PESEL);
+
+        appUserServiceTest.getUserByPesel(PESEL);
+
+        verify(appUserRepository).findAppUserByPesel(PESEL);
     }
+
 
     @Test
     void canGetAllUsers() {
         appUserServiceTest.getAllUsers();
         verify(appUserRepository).findAll();
     }
+
+    
 }
